@@ -75,3 +75,50 @@ Este proyecto permite:
 ├── js/
 │   └── scripts.js
 └── README.md
+```
+
+---
+
+## 💻 Requisitos Funcionales Cumplidos
+
+- ✅ Uso de HTML5.
+- ✅ Uso de CSS y media queries para diseño responsive.
+- ✅ Implementación de Bootstrap.
+- ✅ Uso de JavaScript para eventos dinámicos.
+- ✅ Uso de jQuery para manipulación del DOM.
+- ✅ Preparado para repositorio GitHub.
+
+---
+
+## 📸 Screenshots
+
+*(Agrega imágenes aquí si quieres mostrar vistas del sistema: dashboard, listado de alumnos, modales, etc.)*
+
+---
+
+## 🚀 Cómo usar
+
+1. Clona este repositorio:
+
+```bash
+git clone https://github.com/usuario/repositorio.git
+```
+
+2. Abre `index.html` en tu navegador.
+
+3. Navega entre Dashboard y Cursos.
+
+4. Administra los datos según las opciones disponibles.
+
+---
+
+## 🤝 Autor
+
+**Escuela de Adultos Jorge Alessandri Rodríguez**  
+Proyecto desarrollado como solución educativa para EPJA.
+
+---
+
+## 📄 Licencia
+
+MIT License
