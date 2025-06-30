@@ -12,10 +12,10 @@ Este proyecto permite:
 ✅ Agregar, editar y borrar alumnos.  
 ✅ Registrar acciones pedagógicas específicas para cada alumno.  
 ✅ Visualizar información en gráficos dinámicos (Dashboard).  
-✅ Editar nombre del Profesor Jefe de cada curso.  
+✅ Editar el nombre del Profesor Jefe de cada curso.  
 ✅ Guardar datos en LocalStorage para persistencia entre sesiones.
 
-
+---
 
 ## ⚙️ Tecnologías utilizadas
 
@@ -45,7 +45,7 @@ Este proyecto permite:
 ### Gestión de Alumnos
 
 - Agregar nuevo alumno.
-- Editar datos de alumno:
+- Editar datos del alumno:
   - Nombre.
   - Fecha de nacimiento.
   - Teléfono.
@@ -56,7 +56,7 @@ Este proyecto permite:
 
 ### Gestión Profesor Jefe
 
-- Editar nombre del profesor jefe para cada curso.
+- Editar el nombre del profesor jefe para cada curso.
 
 ---
 
@@ -75,29 +75,3 @@ Este proyecto permite:
 ├── js/
 │   └── scripts.js
 └── README.md
-
----
-
-## 💻 Requisitos Funcionales Cumplidos
-
-- ✅ Uso de HTML5.
-- ✅ Uso de CSS y media queries para diseño responsive.
-- ✅ Implementación de Bootstrap.
-- ✅ Uso de JavaScript para eventos dinámicos.
-- ✅ Uso de jQuery para manipulación DOM.
-- ✅ Preparado para repositorio GitHub.
-
----
-
-## 📸 Screenshots
-
-*(Agrega imágenes aquí si quieres mostrar vistas del sistema: dashboard, listado de alumnos, modales, etc.)*
-
----
-
-## 🚀 Cómo usar
-
-1. Clona este repositorio:
-
-```bash
-git clone https://github.com/usuario/repositorio.git
