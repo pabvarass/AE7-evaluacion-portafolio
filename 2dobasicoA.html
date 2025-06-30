@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2.º Nivel Básico A</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-curso="2dobasicoA">
+  <div class="page-content">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">UTP EPJA</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="cursos.html">Cursos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Abrir sesión</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container my-5">
+      <h2>2.º Nivel Básico A</h2>
+      <p>
+        <strong>Profesor Jefe:</strong>
+        <span id="nombre-profesor">Andrea Soto</span>
+        <button class="btn btn-sm btn-warning ms-2" id="editar-profesor">
+          <i class="bi bi-pencil"></i> Editar
+        </button>
+      </p>
+
+      <h4>Listado de Alumnos</h4>
+      <ul class="list-group mb-3" id="alumnos-list"></ul>
+
+      <h5>Agregar Alumno</h5>
+      <div class="input-group mb-3">
+        <input type="text" id="alumno-nombre" class="form-control" placeholder="Nombre del alumno">
+        <button class="btn btn-success" id="btn-agregar">Agregar</button>
+      </div>
+    </div>
+
+    <!-- Modal Ficha Alumno -->
+    <div class="modal fade" id="modalFicha" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">Ficha Alumno</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <form id="ficha-form">
+              <input type="hidden" id="ficha-index">
+              <div class="mb-3">
+                <label for="ficha-nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="ficha-nombre">
+              </div>
+              <div class="mb-3">
+                <label for="ficha-nacimiento" class="form-label">Fecha de Nacimiento</label>
+                <input type="date" class="form-control" id="ficha-nacimiento">
+              </div>
+              <div class="mb-3">
+                <label for="ficha-telefono" class="form-label">Teléfono</label>
+                <input type="text" class="form-control" id="ficha-telefono">
+              </div>
+              <div class="mb-3">
+                <label for="ficha-observaciones" class="form-label">Observaciones</label>
+                <textarea class="form-control" id="ficha-observaciones"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="ficha-accion" class="form-label">Acción Pedagógica</label>
+                <select class="form-select" id="ficha-accion">
+                  <option value="">Seleccionar acción</option>
+                  <option value="Entrevista Apoderado">Entrevista Apoderado</option>
+                  <option value="Derivación Psicólogo">Derivación Psicólogo</option>
+                  <option value="Apoyo Pedagógico">Apoyo Pedagógico</option>
+                  <option value="Visita Domiciliaria">Visita Domiciliaria</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-primary" id="guardar-ficha">Guardar Cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Editar Profesor -->
+    <div class="modal fade" id="modalProfesor" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-warning">
+            <h5 class="modal-title">Editar Profesor Jefe</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="profesor-nombre" class="form-label">Nombre del Profesor Jefe</label>
+              <input type="text" class="form-control" id="profesor-nombre" value="Andrea Soto">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-warning" id="guardar-profesor">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-primary text-white mt-auto">
+    <div class="container text-center py-3">
+      <p class="mb-2">Escuela de Adultos Jorge Alessandri Rodríguez</p>
+      <div>
+        <a href="#" class="me-3 text-warning"><i class="bi bi-facebook"></i> Facebook</a>
+        <a href="#" class="me-3 text-warning"><i class="bi bi-twitter"></i> Twitter</a>
+        <a href="#" class="me-3 text-warning"><i class="bi bi-instagram"></i> Instagram</a>
+        <a href="#" class="text-warning"><i class="bi bi-youtube"></i> YouTube</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/scripts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
