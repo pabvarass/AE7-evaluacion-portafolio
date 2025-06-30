@@ -15,7 +15,7 @@ Este proyecto permite:
 ✅ Editar nombre del Profesor Jefe de cada curso.  
 ✅ Guardar datos en LocalStorage para persistencia entre sesiones.
 
----
+
 
 ## ⚙️ Tecnologías utilizadas
 
