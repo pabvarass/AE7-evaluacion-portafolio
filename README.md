@@ -90,11 +90,6 @@ Este proyecto permite:
 
 ---
 
-## 📸 Screenshots
-
-*(Agrega imágenes aquí si quieres mostrar vistas del sistema: dashboard, listado de alumnos, modales, etc.)*
-
----
 
 ## 🚀 Cómo usar
 
@@ -115,6 +110,7 @@ git clone https://github.com/usuario/repositorio.git
 ## 🤝 Autor
 
 Pablo Varas Salamanca
+
 Proyecto desarrollado como solución educativa para EPJA.
 
 ---
