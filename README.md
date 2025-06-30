@@ -62,3 +62,41 @@ Este proyecto permite:
 
 ## 🗂 Estructura del Proyecto
 
+📁 / (root)
+├── index.html
+├── cursos.html
+├── 1erbasicoA.html
+├── 1erbasicoB.html
+├── 2dobasicoA.html
+├── 2dobasicoB.html
+├── css/
+│ └── styles.css
+├── js/
+│ └── scripts.js
+└── README.md📁 / (root)
+
+---
+
+## 💻 Requisitos Funcionales Cumplidos
+
+- ✅ Uso de HTML5.
+- ✅ Uso de CSS y media queries para diseño responsive.
+- ✅ Implementación de Bootstrap.
+- ✅ Uso de JavaScript para eventos dinámicos.
+- ✅ Uso de jQuery para manipulación DOM.
+- ✅ Preparado para repositorio GitHub.
+
+---
+
+## 📸 Screenshots
+
+*(Agrega imágenes aquí si quieres mostrar vistas del sistema: dashboard, listado de alumnos, modales, etc.)*
+
+---
+
+## 🚀 Cómo usar
+
+1. Clona este repositorio:
+
+```bash
+git clone https://github.com/usuario/repositorio.git
