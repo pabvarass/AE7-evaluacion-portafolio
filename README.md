@@ -114,7 +114,7 @@ git clone https://github.com/usuario/repositorio.git
 
 ## 🤝 Autor
 
-**Escuela de Adultos Jorge Alessandri Rodríguez**  
+Pablo Varas Salamanca
 Proyecto desarrollado como solución educativa para EPJA.
 
 ---
