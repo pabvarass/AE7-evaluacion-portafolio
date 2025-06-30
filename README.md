@@ -62,6 +62,7 @@ Este proyecto permite:
 
 ## 🗂 Estructura del Proyecto
 
+```plaintext
 📁 / (root)
 ├── index.html
 ├── cursos.html
@@ -70,10 +71,10 @@ Este proyecto permite:
 ├── 2dobasicoA.html
 ├── 2dobasicoB.html
 ├── css/
-│ └── styles.css
+│   └── styles.css
 ├── js/
-│ └── scripts.js
-└── README.md📁 / (root)
+│   └── scripts.js
+└── README.md
 
 ---
 
