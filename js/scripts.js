@@ -1,9 +1,15 @@
 $(document).ready(function () {
+
   // ==========================================
   // DASHBOARD GRÁFICOS
   // ==========================================
+  var cursos = [
+    "1.er Nivel Básico A",
+    "1.er Nivel Básico B",
+    "2.º Nivel Básico A",
+    "2.º Nivel Básico B"
+  ];
 
-  var cursos = ["1.er Nivel Básico A", "1.er Nivel Básico B", "2.º Nivel Básico A", "2.º Nivel Básico B"];
   var totalAlumnos = [15, 12, 10, 14];
   var alumnosConAccion = [5, 3, 2, 6];
 
@@ -22,6 +28,11 @@ $(document).ready(function () {
       options: {
         responsive: true,
         plugins: {
+          title: {
+            display: true,
+            text: "Distribución de Total de Alumnos por Curso",
+            font: { size: 18 }
+          },
           legend: { display: false }
         }
       }
@@ -43,6 +54,11 @@ $(document).ready(function () {
       options: {
         responsive: true,
         plugins: {
+          title: {
+            display: true,
+            text: "Cantidad de Alumnos con Acciones Pedagógicas",
+            font: { size: 18 }
+          },
           legend: { display: false }
         }
       }
@@ -55,7 +71,6 @@ $(document).ready(function () {
       if (totalAlumnos[i] === 0) return 0;
       return ((val / totalAlumnos[i]) * 100).toFixed(1);
     });
-
     new Chart(ctxPorcentaje, {
       type: "pie",
       data: {
@@ -73,6 +88,11 @@ $(document).ready(function () {
       options: {
         responsive: true,
         plugins: {
+          title: {
+            display: true,
+            text: "Porcentaje de Alumnos con Acciones Pedagógicas",
+            font: { size: 18 }
+          },
           legend: { position: "bottom" }
         }
       }
@@ -82,13 +102,18 @@ $(document).ready(function () {
   // ==========================================
   // GESTIÓN DE ALUMNOS
   // ==========================================
-
   var cursoId = $("body").attr("data-curso");
   var alumnos = [];
 
-  if (cursoId && localStorage.getItem("alumnos_" + cursoId)) {
-    alumnos = JSON.parse(localStorage.getItem("alumnos_" + cursoId));
-    renderizarLista();
+  if (cursoId) {
+    if (localStorage.getItem("alumnos_" + cursoId)) {
+      alumnos = JSON.parse(localStorage.getItem("alumnos_" + cursoId));
+      renderizarLista();
+    } else {
+      alumnos = generarAlumnosAleatorios(3);
+      guardarAlumnos();
+      renderizarLista();
+    }
   }
 
   $("#btn-agregar").click(function () {
@@ -99,7 +124,7 @@ $(document).ready(function () {
         nacimiento: "",
         telefono: "",
         observaciones: "",
-        accion: ""
+        accion: []
       });
       guardarAlumnos();
       renderizarLista();
@@ -118,28 +143,34 @@ $(document).ready(function () {
     lista.empty();
 
     alumnos.forEach(function (alumno, index) {
-      var item = $("<li>").addClass("list-group-item d-flex justify-content-between align-items-center");
+      if (typeof alumno.accion === "string") {
+        alumno.accion = alumno.accion ? [alumno.accion] : [];
+      }
 
+      var item = $("<li>").addClass("list-group-item d-flex justify-content-between align-items-center");
       var datos = $("<div>").addClass("d-flex align-items-center");
       var nombre = $("<span>").addClass("fw-bold").text(alumno.nombre);
-      var accion = $("<small>").addClass("text-muted ms-2").text(
-        alumno.accion ? "- " + alumno.accion : "- Sin acción"
-      );
+
+      var accionText = "- Sin acción";
+      if (alumno.accion && alumno.accion.length > 0) {
+        accionText = "- " + alumno.accion.join(" -- ");
+      }
+      var accion = $("<small>").addClass("text-muted ms-2").text(accionText);
+
       datos.append(nombre, accion);
       item.append(datos);
 
       var botones = $("<div>");
-
       var btnEditar = $("<button>")
         .addClass("btn btn-sm btn-editar me-2")
-        .html('<i class="bi bi-pencil"></i>')
+        .text("Editar")
         .click(function () {
           abrirModalFicha(index);
         });
 
       var btnBorrar = $("<button>")
         .addClass("btn btn-sm btn-borrar")
-        .html('<i class="bi bi-trash"></i>')
+        .text("Borrar")
         .click(function () {
           if (confirm("¿Seguro que deseas borrar a este alumno?")) {
             alumnos.splice(index, 1);
@@ -156,14 +187,50 @@ $(document).ready(function () {
 
   function abrirModalFicha(index) {
     var alumno = alumnos[index];
+
+    if (typeof alumno.accion === "string") {
+      alumno.accion = alumno.accion ? [alumno.accion] : [];
+    }
+
     $("#ficha-index").val(index);
     $("#ficha-nombre").val(alumno.nombre);
     $("#ficha-nacimiento").val(alumno.nacimiento);
     $("#ficha-telefono").val(alumno.telefono);
     $("#ficha-observaciones").val(alumno.observaciones);
-    $("#ficha-accion").val(alumno.accion);
+
+    // Renderizar chips de acciones
+    $("#acciones-list").empty();
+    if (alumno.accion && alumno.accion.length > 0) {
+      alumno.accion.forEach(function (accion, i) {
+        var chip = $("<span>")
+          .addClass("badge bg-primary me-2 mb-2")
+          .text(accion)
+          .css("cursor", "pointer")
+          .click(function () {
+            alumno.accion.splice(i, 1);
+            guardarAlumnos();
+            abrirModalFicha(index);
+          });
+        $("#acciones-list").append(chip);
+      });
+    }
+
     $("#modalFicha").modal("show");
   }
+
+  $("#agregar-accion").click(function () {
+    var nuevaAccion = $("#ficha-accion").val().trim();
+    var index = $("#ficha-index").val();
+
+    if (nuevaAccion !== "") {
+      if (!alumnos[index].accion.includes(nuevaAccion)) {
+        alumnos[index].accion.push(nuevaAccion);
+      }
+      guardarAlumnos();
+      $("#ficha-accion").val("");
+      abrirModalFicha(index);
+    }
+  });
 
   $("#guardar-ficha").click(function () {
     var index = $("#ficha-index").val();
@@ -171,7 +238,6 @@ $(document).ready(function () {
     alumnos[index].nacimiento = $("#ficha-nacimiento").val().trim();
     alumnos[index].telefono = $("#ficha-telefono").val().trim();
     alumnos[index].observaciones = $("#ficha-observaciones").val().trim();
-    alumnos[index].accion = $("#ficha-accion").val();
 
     guardarAlumnos();
     renderizarLista();
@@ -181,7 +247,6 @@ $(document).ready(function () {
   // ==========================================
   // EDICIÓN DE PROFESOR JEFE
   // ==========================================
-
   $("#editar-profesor").click(function () {
     var nombreActual = $("#nombre-profesor").text();
     $("#profesor-nombre").val(nombreActual);
@@ -195,4 +260,68 @@ $(document).ready(function () {
       $("#modalProfesor").modal("hide");
     }
   });
+
+  // ==========================================
+  // FUNCIONES AUXILIARES
+  // ==========================================
+  function generarAlumnosAleatorios(cantidad) {
+    var nombresEjemplo = [
+      "Patricia Fuentes",
+      "Carlos Gómez",
+      "Ana Rojas",
+      "Diego Pizarro",
+      "Laura Contreras",
+      "Ricardo Soto",
+      "Javiera Muñoz",
+      "Pedro Castillo",
+      "Sofía Vera",
+      "Miguel Araya"
+    ];
+
+    var accionesPosibles = [
+      "Entrevista Apoderado",
+      "Derivación Psicólogo",
+      "Apoyo Pedagógico",
+      "Visita Domiciliaria"
+    ];
+
+    var alumnos = [];
+
+    for (var i = 0; i < cantidad; i++) {
+      var nombre = nombresEjemplo[Math.floor(Math.random() * nombresEjemplo.length)];
+      var nacimiento = randomFecha("1975-01-01", "2005-12-31");
+      var telefono = "9" + Math.floor(10000000 + Math.random() * 90000000);
+      var observaciones = "Alumno ingresado automáticamente.";
+      var numAcciones = Math.floor(Math.random() * 3);
+      var acciones = [];
+
+      for (var j = 0; j < numAcciones; j++) {
+        var accion = accionesPosibles[Math.floor(Math.random() * accionesPosibles.length)];
+        if (!acciones.includes(accion)) {
+          acciones.push(accion);
+        }
+      }
+
+      alumnos.push({
+        nombre: nombre,
+        nacimiento: nacimiento,
+        telefono: telefono,
+        observaciones: observaciones,
+        accion: acciones
+      });
+    }
+
+    return alumnos;
+  }
+
+  function randomFecha(start, end) {
+    var startDate = new Date(start);
+    var endDate = new Date(end);
+    var randomDate = new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()));
+    var year = randomDate.getFullYear();
+    var month = String(randomDate.getMonth() + 1).padStart(2, '0');
+    var day = String(randomDate.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
 });

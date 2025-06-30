@@ -8,8 +8,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body data-curso="2dobasicoA">
-  <div class="page-content">
+<body data-curso="2dobasicoA" class="d-flex flex-column min-vh-100">
+  <div class="page-content flex-grow-1">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">UTP EPJA</a>
@@ -39,7 +39,7 @@
         <strong>Profesor Jefe:</strong>
         <span id="nombre-profesor">Andrea Soto</span>
         <button class="btn btn-sm btn-warning ms-2" id="editar-profesor">
-          <i class="bi bi-pencil"></i> Editar
+          Editar
         </button>
       </p>
 
@@ -81,14 +81,20 @@
                 <textarea class="form-control" id="ficha-observaciones"></textarea>
               </div>
               <div class="mb-3">
-                <label for="ficha-accion" class="form-label">Acción Pedagógica</label>
-                <select class="form-select" id="ficha-accion">
-                  <option value="">Seleccionar acción</option>
-                  <option value="Entrevista Apoderado">Entrevista Apoderado</option>
-                  <option value="Derivación Psicólogo">Derivación Psicólogo</option>
-                  <option value="Apoyo Pedagógico">Apoyo Pedagógico</option>
-                  <option value="Visita Domiciliaria">Visita Domiciliaria</option>
-                </select>
+                <label class="form-label">Acciones Pedagógicas</label>
+                <div id="acciones-list" class="mb-2"></div>
+                <div class="input-group">
+                  <select class="form-select" id="ficha-accion">
+                    <option value="">Seleccionar acción</option>
+                    <option value="Entrevista Apoderado">Entrevista Apoderado</option>
+                    <option value="Derivación Psicólogo">Derivación Psicólogo</option>
+                    <option value="Apoyo Pedagógico">Apoyo Pedagógico</option>
+                    <option value="Visita Domiciliaria">Visita Domiciliaria</option>
+                  </select>
+                  <button class="btn btn-primary" type="button" id="agregar-accion">
+                    Agregar
+                  </button>
+                </div>
               </div>
             </form>
           </div>
